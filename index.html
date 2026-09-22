@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+   
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+    <title>JTKvíz</title>
+	
+    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="mobil.css">
+	<script src="js/kerdesek.js"></script>
+	<script src="js/ui.js"></script>
+	<script src="js/game-core.js"></script>
+	<script src="js/events.js"></script>
+	<script src="js/player.js"></script> 
+	<script> laikusvedelem();</script> 
+
+</head>
+
+<body>
+
+<!-- START KÉPERNYŐ -->
+<section id="screen-start" class="screen">
+    <div class="center-block">
+        <h1>JTKvíz</h1>
+        <h3 class="intro-text">
+            12 állítás. Igaz vagy hamis? <br> 
+            A cél, hogy jól tippelj – és jól ítéld meg magad.
+        </h3>
+
+		<div class="player-box">
+			<div id="player-name-display">Név: Tamás</div>
+			<div id="player-level-display">Szint: Level‑1 Gyerek</div>
+			<button id="btn-new-player">Játékos módosítása</button>
+		</div>
+
+        <button id="btn-start" class="main-btn">START • Új játék</button>
+		<div class="rules-link">Játékszabály</div>
+				
+    </div>
+	 
+	
+</section>
+
+<div id="player-popup" class="popup hidden">
+    <div class="popup-content">
+
+        <h2>Játékos beállításai</h2>
+
+        <label for="player-name">Név:</label>
+        <input id="player-name" type="text" placeholder="Add meg a neved">
+
+        <label for="player-level">Szint:</label>
+        <select id="player-level">
+            <option value="1">Level 1 – max. Level1max</option>
+            <option value="2">Level 2 – max. Level2max</option>
+            <option value="3">Level 3 – max. Level3max</option>
+            <option value="4">Level 4 – max. Level4max</option>
+            <option value="5">Level 5 – max. Level5max</option>
+        </select>
+
+        <div class="popup-footer">
+            <button id="btn-player-ok" class="main-btn">Mentés</button>
+            <button id="btn-player-cancel" class="main-btn">Mégse</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- KÉRDÉS KÉPERNYŐ (1–12) -->
+<section id="screen-question" class="screen hidden">
+    <div class="center-block">
+        <h2 id="question-number">1. Állítás</h2>
+		<p id="question-text" class="question-text">
+        <span id="scroll-hint" class="scroll-hint">▼</span></p>
+
+        <div class="answer-buttons">
+            <button id="btn-true" class="answer-true">IGAZ</button>    <button id="btn-false" class="answer-false">HAMIS</button>
+        </div>
+
+       
+    </div>
+</section>
+
+
+<!-- TIPPJEID KÉPERNYŐ -->
+<section id="screen-review" class="screen hidden">
+    <h2>Tippjeid, Most még egy válaszodat megváltoztathatod.</h2>
+
+    <table id="review-table">
+        <thead>
+            <tr>
+                <th>Állítás</th>
+                <th>Tipped</th>
+                <th>Csere</th>
+            </tr>
+        </thead>
+        <tbody id="review-body">
+            <!-- 12 sor JS-ből -->
+        </tbody>
+    </table>
+	<button id="btn-no-change" class="main-btn">Köszönöm, nem cserélek</button>
+	<button id="btn-continue-review" class="main-btn hidden">Tovább az aranykör beállításhoz</button>
+	   
+</section>
+
+<!-- CSERE VIZUÁLIS EFFEKT -->
+<div id="swap-effect-overlay" class="hidden">
+    <div class="swap-icon">🔄</div>
+</div>
+
+<!-- ARANYKÖR POPUP -->
+<div id="popup-aranykor" class="popup hidden">
+    <h3>Aranykör beállítása</h3>
+    <p>Válaszd ki, hogy szerinted hány helyes válaszod van!</p>
+
+    <div class="aranykor-options">
+        <button data-range="1-3">1–3 találat</button>
+        <button data-range="4-6">4–6 találat</button>
+        <button data-range="7-9">7–9 találat</button>
+        <button data-range="10-12">10–12 találat</button>
+    </div>
+</div>
+
+
+<!-- TÖKÉLETES SZÁM POPUP -->
+<div id="popup-perfect" class="popup hidden">
+    <h3>Tökéletes szám</h3>
+    <p id="perfect-bonus-text">Ha pontosan eltalálod, plusz bónusz pontot kapsz!</p>
+
+    <div id="perfect-options" class="perfect-options">
+        <!-- JS tölti fel a sávon belüli számokat -->
+    </div>
+</div>
+<!-- FELTÁRÁS INDÍTÓ POPUP -->
+<div id="popup-start-reveal" class="popup hidden">
+    <h3>Na nézzük!</h3>
+    <p>Kiválasztottad az Aranykört és a Tökéletes számot. Most jön a 12 állítás feltárása.</p>
+    <button id="btn-start-reveal" class="main-btn">Na nézzük!</button>
+</div>
+
+<!-- JOKER FELKÍNÁLÓ POPUP -->
+<div id="popup-joker-offer" class="popup hidden">
+    <h3>Jóker</h3>
+    <p>Szeretnéd használni a Jokert? Kijavítunk egy rossz tippet a hátralévő kérdések közül, de a nyereményed feleződik.</p>
+
+    <div class="popup-footer">
+        <button id="btn-joker-yes" class="main-btn">Igen, használom</button>
+        <button id="btn-joker-no" class="main-btn">Nem, megyek tovább</button>
+    </div>
+</div>
+
+<!-- GAME OVER POPUP -->
+<div id="popup-game-over" class="popup hidden">
+    <h3>Game Over</h3>
+    <p>Ezzel az Aranykör-sávval már nem nyerhetsz, de a kérdéseket végignézheted.</p>
+    <button id="btn-game-over-continue" class="main-btn">Azért nézzük végig</button>
+</div>
+
+<!-- GAME OVER VIZUÁLIS EFFEKT -->
+<div id="gameover-effect-overlay" class="hidden">
+    <div class="gameover-icon">☠️</div>
+</div>
+
+<!-- GYŐZELEM VIZUÁLIS EFFEKT -->
+<div id="victory-effect-overlay" class="hidden">
+    <div class="victory-icon">💥</div>
+</div>
+
+<!-- JOKER INFÓ POPUP -->
+<div id="popup-joker-info" class="popup hidden">
+    <h3>Jóker</h3>
+    <p id="joker-info-text"></p>
+    <button id="btn-joker-info-close" class="main-btn">Bezár</button>
+</div>
+
+<!-- FELTÁRÁS KÉPERNYŐ -->
+<section id="screen-reveal" class="screen hidden">
+
+	<div id="reveal-popup" class="popup hidden">
+		<div class="popup-content">
+
+			<!-- FELSŐ FIX RÉSZ -->
+			<div class="popup-header">
+			    <p id="reveal-swapped-notice" class="hidden">Ezt cserélted!</p>
+				<h2 id="reveal-question"></h2>
+				<p id="reveal-tip"></p>
+				<p id="reveal-warning" class="hidden"></p>
+			</div>
+			<!-- KÖZÉPSŐ GÖRGETHETŐ RÉSZ -->
+			<div class="popup-body">
+				<div id="reveal-fact" class="hidden">
+					<p id="fact-text"></p>
+					<p id="fact-explain"></p>
+				</div>
+			</div>
+
+			<!-- ALSÓ FIX GOMBOK -->
+			<div class="popup-footer">
+				<button id="btn-reveal" class="main-btn">Nézzük!</button>
+				<button id="btn-next" class="main-btn hidden">Következő</button>
+			</div>
+
+		</div>
+	</div>
+
+
+	
+    <table id="reveal-table">
+        <thead>
+            <tr>
+                <th>Kérdés</th>
+                <th>Tény</th>
+                <th>Tipped</th>
+                <th>Nyeremény</th>
+            </tr>
+        </thead>
+        <tbody id="reveal-body">
+            <!-- 12 sor JS-ből -->
+        </tbody>
+    </table>
+	<div id="reveal-final-buttons" class="hidden">
+		<button id="btn-new-game" class="main-btn">Új játék</button>
+		<button id="btn-joker-info" class="main-btn hidden">Jóker infó</button>
+		<button id="btn-download-csv" class="main-btn">Eredmény letöltése (CSV)</button>
+		<button id="btn-new-player2" class="main-btn">Új játékos, új szint</button>
+	</div>
+	<!-- VÉGSŐ EREDMÉNY POPUP -->
+	<div id="popup-final-result" class="popup hidden">
+		<h2 id="final-result-title"></h2>
+		<h3 id="reveal-final-score"></h3>
+		<button id="btn-final-close" class="main-btn">Bezár</button>
+	</div>	
+	<!-- JOKER VIZUÁLIS EFFEKT -->
+	<div id="joker-effect-overlay" class="hidden">
+		<div class="joker-card">🃏</div>
+	</div>	
+	
+	
+
+	
+	
+</section>
+
+<!-- JÁTÉKSZABÁLY POPUP -->
+	<div id="popup-rules" class="popup hidden">
+    	<h3>Játékszabály</h3>
+		<div class="popup-body">
+<h4>A játék célja</h4>
+<p>12 állítást kapsz egymás után. Minden állításról el kell döntened: igaz vagy hamis. A cél, hogy minél pontosabban felmérd, hány választ tudtál helyesen megadni – mert nem feltétlenül a legtöbb helyes válasz nyer, hanem az, aki jól becsüli meg saját magát.</p>
+
+<h4>1. lépés – A 12 kérdés</h4>
+<p>Sorban megkapod mind a 12 állítást, egyenként el kell döntened, igaz vagy hamis. Ha végeztél, a "Tippjeim" gombbal egyben átnézheted az összes választásodat.</p>
+
+<h4>2. lépés – Egy csere</h4>
+<p>Ezen a ponton <b>egyetlen egy</b> válaszodat meggondolhatod, és megváltoztathatod. Ha nem szeretnél élni ezzel, egyszerűen továbbléphetsz.</p>
+
+<h4>3. lépés – Az Aranykör</h4>
+<p>Itt kell megjelölnöd, szerinted <b>hány</b> helyes válaszod van, az alábbi négy sáv közül választva:</p>
+<p>
+1–3 helyes válasz<br>
+4–6 helyes válasz<br>
+7–9 helyes válasz<br>
+10–12 helyes válasz
+</p>
+<p>A több helyes választ tartalmazó sáv magasabb nyeremény alapot jelent! Az aranykör megjelölésekor láthatod az elérhető nyereményt is.</p>
+<p>Csak akkor nyersz, ha a <b>valódi</b> helyes válaszaid száma pontosan a megjelölt sávba esik – se több, se kevesebb.</p>
+
+<h4>4. lépés – A Tökéletes szám</h4>
+<p>A választott sávon belül ki kell választanod egy <b>pontos</b> számot is (pl. ha a 7–9 sávot jelölted, választhatsz 7, 8 vagy 9 közül). Ha a valódi helyes válaszaid száma pontosan ez a szám, akkor a játékszintednek megfelelően plusz bónusz pontokat kapsz a nyereményed felett.</p>
+
+<h4>5. lépés – A feltárás</h4>
+<p>Innentől kérdésről kérdésre, megkevert sorrendben (nem az eredeti sorrendben!) derül ki, hogy jól tippeltél-e. Minden kérdésnél a Játékmester előbb megmutatja a kérdést és a tippedet, majd egy gombnyomással felfedi a helyes választ is – itt még van idő vitatkozni, mielőtt kiderül az igazság!</p>
+
+<h4>A Jóker</h4>
+<p>A feltárás közben, amint már legalább 5 kérdés kiderült, bármikor felajánljuk a Jokert – egészen az utolsó, 10. kérdésig. Ha élsz vele:</p>
+<p>
+a végső nyereményalapod <b>megfeleződik</b>,<br>
+cserébe a rendszer a még fel nem tárt kérdések közül kijavít egy rossz tippedet – ha volt ilyen.
+</p>
+<p><i>Fontos: ha éppen nincs több rossz tipped a hátralévők között, a Jóker akkor is elhasználódik, csak nem javít semmit – tehát érdemes jól megfontolni, mikor élsz vele!</i></p>
+
+<h4>Mikor veszítesz?</h4>
+<p>Ha a feltárás közben már biztossá válik, hogy nem találhatod el a megjelölt sávot (mert túl sok, vagy túl kevés helyes válaszod lett), a játék "Game Over"-t jelez – de a maradék kérdéseket ettől függetlenül végig megmutatjuk.</p>
+
+<h4>Mikor nyersz?</h4>
+<p>Ha mind a 12 kérdés feltárult, és a valódi helyes válaszaid száma pontosan a megjelölt Aranykör-sávba esik, gratulálunk – tiéd a nyeremény (a Jóker felezésével és a Tökéletes szám bónuszával együtt számolva)!</p>	    	
+			
+		</div>
+		<button id="btn-rules-close" class="main-btn">Bezár</button>
+	</div>	
+
+
+
+</body>
+</html>
