@@ -1,0 +1,85 @@
+
+function bindEvents() {
+
+    /* -----------------------------
+       START gomb
+       ----------------------------- */
+    const btnStart = document.getElementById("btn-start");
+    if (btnStart) {
+        btnStart.onclick = function () {
+			
+         /* FUL SCREEN F11 
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(function () {
+                    // Ha elutasítja vagy nem támogatott, a játék enélkül is fut tovább
+                });
+            }
+         */
+		/* FUL SCREEN F11 - Csak akkor fut le, ha NEM parancsikonból nyitották meg */
+			const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+			if (!isPWA && document.documentElement.requestFullscreen) { 
+				document.documentElement.requestFullscreen().catch(function () {
+					// Ha elutasítja, a játék enélkül is fut tovább
+				});
+			}
+		 
+            initGame();
+
+            const level = 1;
+            selectQuestionsByLevel(player.level);
+
+            currentQuestionIndex = 0;
+            showQuestion();
+        };
+    }
+
+-------------------------------------------------
+
+sw.js a gyökér könyvtárba:
+self.addEventListener('fetch', function(event) {});
+--------------------------------------------------
+manifest.json a gyökér könyvtárba.
+{
+  "name": "JTKvíz",
+  "short_name": "JTKvíz",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#002b5c",
+  "icons": [
+    {
+      "src": "ikon.png",
+      "sizes": "212x212",
+      "type": "image/png"
+    }
+  ]
+}
+----------------------------------------------------
+
+index.html headerbe:
+
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+
+-------------------------------------------------------------
+ bodyba:
+        <button id="btn-start" class="main-btn">START • Új játék</button>
+		<div class="rules-link">Játékszabály</div>
+				
+       </div>
+	<button id="telepito-gomb" style="display: none; padding: 12px 24px; background: #002b5c; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin: 20px auto;">
+    Parancsikon hozzáadása a kezdőképernyőhöz
+    </button>
+-----------------------------------------------------
+
+
+
+
+
+
+

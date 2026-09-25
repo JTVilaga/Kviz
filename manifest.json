@@ -1,0 +1,12 @@
+{
+"name": "JTKvíz",
+  "short_name": "JTKvíz",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#002b5c",
+  "icons": [
+    { "src": "ikon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "ikon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

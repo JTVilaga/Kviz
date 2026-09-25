@@ -1,0 +1,16 @@
+﻿Játékos;Dátum;Cserélt;Vett Jokert;Zöld végső;Piros végső;Aranykör;Tökéletes szám;Nyeremény összege;Kiesés lépése
+Tomi2;2026. 09. 20.;Igen;Igen;4;8;7-9;9;0;9
+
+Kérdés;Tény;Tipped
+"A Szahara sivatagban esett már hó.";IGAZ;HAMIS
+"A Vatikán a világ legkisebb önálló állama.";IGAZ;HAMIS
+"A Föld a Nap körül kering.";IGAZ;IGAZ
+"Az 1 KW nagyobb teljesítmény mint 1 lóerő.";IGAZ;HAMIS
+"A világ legnagyobb óceánja több mint a Föld felszínének egyharmadát lefedi.";IGAZ;IGAZ
+"A Tejútrendszerben található csillagok száma kevesebb, mint a Föld népessége.";HAMIS;IGAZ
+"Egy pók 4 lábbal rendelkezik, ugyanannyival, mint egy kutya.";HAMIS;IGAZ
+"A Föld légkörének több mint 20%-a oxigén.";IGAZ;IGAZ
+"Albert Einstein megbukott matematikából az iskolában, és élete végéig soha nem tanult vezetni autót.";HAMIS;IGAZ
+"A banán DNS-ének több mint 50%-a megegyezik az emberével.";IGAZ;IGAZ
+"A Wi-Fi nem a „wireless fidelity” rövidítése.";IGAZ;HAMIS
+"A béka a szárazföldön és a vízben is képes élni.";IGAZ;HAMIS
