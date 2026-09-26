@@ -2,6 +2,19 @@
     MOBIL
 	--------------------------------------- */
 @media (max-width: 700px) {
+    #reveal-final-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Ha 2 oszlopnál páratlan számú gomb van (pl. 3),
+       az utolsó, magára maradt gomb töltse ki a sort, középre igazítva */
+    #reveal-final-buttons .main-btn:last-child:nth-child(2n+1) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: calc(50% - 1vmin);
+    }
+	
+
 
     #screen-reveal {
         display: flex;
@@ -9,15 +22,32 @@
         height: 100vh;
         padding: 0;
         overflow: auto;
+		position: relative;
     }
+
+
+    
+
+    #reveal-table::after {
+        content: "";
+        display: block;
+        height: 2vmin;
+        margin: 1.5vmin 2vw 0;
+        background: linear-gradient(90deg, var(--gold), var(--cyan), var(--gold));
+        border-radius: 1vmin;
+        box-shadow: 0 0 2vmin rgba(255, 201, 74, 0.6);
+    }
+
 
     #reveal-table {
         order: 1;
         flex: 0 1 auto;
         max-height: 45vh;
         overflow-y: auto;
-        width: 96vw;
-        margin: 0;
+        width: 99vw;
+		margin-left: 1vw;
+		box-sizing: border-box;
+		position: relative;
     }
 
     #reveal-popup {
@@ -44,10 +74,6 @@
     }
 	
 
-
-    #reveal-table {
-        position: relative;
-    }
 
     #reveal-table::after {
         content: "";
@@ -117,8 +143,12 @@
 	.question-text {
         font-size: 6vmin;
 		overflow: visible;
-		Height: 36vh;
+		Height: 36vmin;
     }
+	.question-text.qlevel-1 { height: 27vmin; }
+	.question-text.qlevel-2 { height: 45vmin; }
+	.question-text.qlevel-3 { height: 70vmin; }
+	
 	#reveal-popup h2{
         color:white;
 		margin:3vmin;
