@@ -1,4 +1,4 @@
-const CACHE_NAME = "jtkviz-cache-v1";
+const CACHE_NAME = "jtkviz-cache-v2";
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -11,7 +11,10 @@ const ASSETS_TO_CACHE = [
     "js/game-core.js",
     "js/events.js",
     "js/player.js",
-    "jtkviz-hatter.jpg"
+    "jtkviz-hatter.jpg",
+	"ikon.jpg",
+	"ikon-192.png",
+	"ikon-512.png"
 ];
 
 self.addEventListener("install", function (event) {
