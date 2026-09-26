@@ -47,13 +47,23 @@
 	<button id="telepito-gomb" class="btn-telepit"> Telepítés, Parancsikon hozzáadása a kezdőképernyőhöz </button>
 	
 	 <button id="btn-share" class="btn-share hidden">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="18" cy="5" r="3" fill="white"/>
-        <circle cx="6" cy="12" r="3" fill="white"/>
-        <circle cx="18" cy="19" r="3" fill="white"/>
-        <path d="M8.6 10.6l6.8-3.8M8.6 13.4l6.8 3.8" stroke="white" stroke-width="2" fill="none"/>
-    </svg>
-</button>
+	<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+		  <g transform="rotate(213 12 12)">
+			<!-- Vonalak -->
+			<line x1="12" y1="12" x2="6"  y2="8"  stroke="white" stroke-width="2" />
+			<line x1="12" y1="12" x2="18" y2="8"  stroke="white" stroke-width="2" />
+			<line x1="12" y1="12" x2="12" y2="18" stroke="white" stroke-width="2" />
+
+			<!-- Körök -->
+			<circle cx="6"  cy="8"  r="2" fill="white" />
+			<circle cx="18" cy="8"  r="2" fill="white" />
+			<circle cx="12" cy="18" r="2" fill="white" />
+
+			<!-- Középső csomópont -->
+			<circle cx="12" cy="12" r="2" fill="white" />
+		  </g>
+		</svg>
+	</button>	
 	
 </section>
 
@@ -62,8 +72,6 @@
         <path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z" fill="white"/>
     </svg>
 </button>
-
-
 
 <div id="player-popup" class="popup hidden">
     <div class="popup-content">
