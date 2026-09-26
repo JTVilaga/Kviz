@@ -111,8 +111,10 @@
     }
 
     #reveal-popup #reveal-question {
-        font-size: 6.5vmin;
+        font-size: 5.5vmin;
     }
+
+	 
 	.btn-csere{
         font-size: 4vmin;
 		width: auto;
@@ -156,10 +158,25 @@
 	.question-text.qlevel-1 { height: 27vmin; }
 	.question-text.qlevel-2 { height: 45vmin; }
 	.question-text.qlevel-3 { height: 70vmin; }
+	#reveal-popup #reveal-question {
+		font-size: 4vmin;
+	}
+
+	#reveal-popup .popup-content.qlevel-2 #reveal-question {
+		font-size: 4vmin;
+	}
+
+	#reveal-popup .popup-content.qlevel-3 #reveal-question {
+		font-size: 4vmin;
+	}	
+	
+	
+	
 	
 	#reveal-popup h2{
         color:white;
 		margin:3vmin;
+		font-size: 5.5vmin;
     }
 	.player-box {
         margin: 3vmin auto;
@@ -182,5 +199,11 @@
 	select, input {
 	    font-size: 4vmin; 
 	}
+	
+	.btn-home, .btn-share{
+    width: 11vmin;
+    height: 11vmin;
+}
+	
  
 }
