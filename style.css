@@ -710,8 +710,33 @@ tbody tr {
     z-index: 500;
     padding: 0;
 }
+.btn-home svg, .btn-share svg {
+    width: 5.5vmin;
+    height: 5.5vmin;
+}
 
 .btn-share:hover {
+    transform: scale(1.08);
+}
+.btn-home {
+    position: fixed;
+    top: 3vmin;
+    left: 3vmin;
+    width: 10vmin;
+    height: 10vmin;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3d8bff, #1a5be0);
+    color: white;
+    font-size: 5vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 2vmin rgba(111, 208, 255, 0.5);
+    z-index: 1500;
+    padding: 0;
+}
+
+.btn-home:hover {
     transform: scale(1.08);
 }
 
