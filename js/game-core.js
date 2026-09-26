@@ -127,7 +127,6 @@ function selectQuestionsByLevel(level) {
 /* ------------------------------------------------------------
    KÉRDÉS MEGJELENÍTÉSE
    ------------------------------------------------------------ */
-
 function showQuestion() {
     const q = questions[currentQuestionIndex];
 
@@ -140,6 +139,8 @@ function showQuestion() {
 
     if (textElem) {
         textElem.textContent = q.text;
+        textElem.classList.remove("qlevel-1", "qlevel-2", "qlevel-3");
+        textElem.classList.add(getQuestionBoxLevelClass());
     }
 
     showScreen("screen-question");
@@ -387,7 +388,11 @@ function showNextRevealQuestion() {
     if (btnNext) btnNext.classList.add("hidden");
     if (btnReveal) btnReveal.classList.remove("hidden");
 
-    if (popupContent) popupContent.classList.remove("bg-correct", "bg-wrong");
+    /* if (popupContent) popupContent.classList.remove("bg-correct", "bg-wrong"); */
+    if (popupContent) {
+        popupContent.classList.remove("bg-correct", "bg-wrong", "qlevel-1", "qlevel-2", "qlevel-3");
+        popupContent.classList.add(getQuestionBoxLevelClass());
+    }
 	
 	const swappedNoticeElem = document.getElementById("reveal-swapped-notice");
     if (swappedNoticeElem) {
@@ -1173,4 +1178,16 @@ function goToStartScreen() {
 
     initGame();
     showScreen("screen-start");
+}
+
+function getQuestionBoxLevelClass() {
+    let maxLevel = 1;
+
+    if (player.level === 1) maxLevel = 1;
+    else if (player.level === 2) maxLevel = 2;
+    else if (player.level === 3) maxLevel = 2;
+    else if (player.level === 4) maxLevel = 3;
+    else if (player.level === 5) maxLevel = 3;
+
+    return "qlevel-" + maxLevel;
 }
