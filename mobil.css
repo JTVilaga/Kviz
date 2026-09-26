@@ -13,7 +13,10 @@
         justify-self: center;
         max-width: calc(50% - 1vmin);
     }
-	
+		table{
+		font-size: 4vmin;
+	}
+
 
 
     #screen-reveal {
