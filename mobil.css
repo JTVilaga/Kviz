@@ -2,20 +2,26 @@
     MOBIL
 	--------------------------------------- */
 @media (max-width: 700px) {
-    #reveal-final-buttons {
-        grid-template-columns: repeat(2, 1fr);
-    }
+
 	#review-table {
 	   // border-collapse: separate;
 	   //  border-spacing: 0 1vmin;
 	   font-size: 4vmin;
-	}
+	}	
+
+    #reveal-final-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     /* Ha 2 oszlopnál páratlan számú gomb van (pl. 3),
        az utolsó, magára maradt gomb töltse ki a sort, középre igazítva */
     #reveal-final-buttons .main-btn:last-child:nth-child(2n+1) {
         grid-column: 1 / -1;
         justify-self: center;
         max-width: calc(50% - 1vmin);
+    }
+	
+
 
     #screen-reveal {
         display: flex;
@@ -26,7 +32,8 @@
 		position: relative;
     }
 
-   
+
+    
 
     #reveal-table::after {
         content: "";
@@ -48,6 +55,7 @@
 		margin-left: 1vw;
 		box-sizing: border-box;
 		position: relative;
+
     }
 
     #reveal-popup {
