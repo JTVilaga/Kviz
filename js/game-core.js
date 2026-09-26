@@ -1154,3 +1154,23 @@ function initShareButton() {
         btnShare.classList.remove("hidden");
     }
 }
+
+function goToStartScreen() {
+    const confirmed = confirm("Biztosan megszakítod a jelenlegi játékot, és visszatérsz a kezdőképernyőre?");
+    if (!confirmed) return;
+
+    document.querySelectorAll(".popup").forEach(function (popup) {
+        popup.classList.add("hidden");
+    });
+
+    ["joker-effect-overlay", "swap-effect-overlay", "gameover-effect-overlay", "victory-effect-overlay"].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("hidden");
+    });
+
+    const buttonsBox = document.getElementById("reveal-final-buttons");
+    if (buttonsBox) buttonsBox.classList.add("hidden");
+
+    initGame();
+    showScreen("screen-start");
+}

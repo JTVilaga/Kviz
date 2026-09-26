@@ -7,7 +7,6 @@
 /* ------------------------------------------------------------
    KÉPERNYŐK VÁLTÁSA
    ------------------------------------------------------------ */
-
 function showScreen(id) {
     const screens = document.querySelectorAll(".screen");
     screens.forEach(function (screen) {
@@ -17,6 +16,15 @@ function showScreen(id) {
     const target = document.getElementById(id);
     if (target) {
         target.classList.remove("hidden");
+    }
+
+    const btnHome = document.getElementById("btn-home");
+    if (btnHome) {
+        if (id === "screen-start") {
+            btnHome.classList.add("hidden");
+        } else {
+            btnHome.classList.remove("hidden");
+        }
     }
 }
 
@@ -145,3 +153,4 @@ function laikusvedelem(){
         }
     });
 }
+

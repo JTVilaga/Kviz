@@ -205,24 +205,29 @@ function bindEvents() {
             shareGameLink();
         };
     }	
-
-let installPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    installPrompt = e; 
-    // Megjelenítjük a gombot, mert a Netlify-on a Chrome most már engedélyezni fogja!
-    const gomb = document.getElementById('telepito-gomb');
-    if (gomb) gomb.style.display = 'block'; 
-});
-
-document.getElementById('telepito-gomb').addEventListener('click', () => {
-    if (installPrompt) {
-        installPrompt.prompt();
-        installPrompt = null;
-        document.getElementById('telepito-gomb').style.display = 'none';
+    const btnHome = document.getElementById("btn-home");
+    if (btnHome) {
+        btnHome.onclick = function () {
+            goToStartScreen();
+        };
     }
-});	
+	let installPrompt;
+
+	window.addEventListener('beforeinstallprompt', (e) => {
+		e.preventDefault();
+		installPrompt = e; 
+		// Megjelenítjük a gombot, mert a Netlify-on a Chrome most már engedélyezni fogja!
+		const gomb = document.getElementById('telepito-gomb');
+		if (gomb) gomb.style.display = 'block'; 
+	});
+
+	document.getElementById('telepito-gomb').addEventListener('click', () => {
+		if (installPrompt) {
+			installPrompt.prompt();
+			installPrompt = null;
+			document.getElementById('telepito-gomb').style.display = 'none';
+		}
+	});	
 	
 	
 }
