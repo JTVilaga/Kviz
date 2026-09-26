@@ -28,7 +28,11 @@
 		position: relative;
     }
 
-
+	#review-table {
+	   // border-collapse: separate;
+	   //  border-spacing: 0 1vmin;
+	   font-size: 4vmin;
+	}
     
 
     #reveal-table::after {
