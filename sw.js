@@ -1,4 +1,4 @@
-const CACHE_NAME = "jtkviz-cache-v4";
+const CACHE_NAME = "jtkviz-cache-v3";
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -55,24 +55,19 @@ self.addEventListener("fetch", function (event) {
     }
 
     event.respondWith(
-        caches.match(event.request).then(function (cached) {
-            if (cached) return cached;
-
-            return fetch(event.request).then(function (response) {
-                if (response.ok) {
-                    const responseClone = response.clone();
-                    caches.open(CACHE_NAME).then(function (cache) {
-                        cache.put(event.request, responseClone);
-                    });
-                }
-                return response;
-            }).catch(function () {
-                // nincs net és nincs cache-elve sem
-            });
+        fetch(event.request).then(function (response) {
+            if (response.ok) {
+                const responseClone = response.clone();
+                caches.open(CACHE_NAME).then(function (cache) {
+                    cache.put(event.request, responseClone);
+                });
+            }
+            return response;
+        }).catch(function () {
+            return caches.match(event.request);
         })
     );
 });
-
 /* ----------------------------------------------------------------------------------------------------------------------------------
 Amikor legközelebb módosítod bármelyik fájlt (CSS, JS), változtasd meg a CACHE_NAME értékét (pl. "jtkviz-cache-v2") — az activate esemény ez alapján dobja ki a régi cache-t, és tölti be helyette a frisset. Ha ezt elfelejted, a felhasználó a régi, cache-elt verziót fogja kapni akkor is, ha újra feltöltöd a friss fájlokat — ez a leggyakoribb "miért nem látom a változást" hiba PWA-knál.
 ----------------------------------------------------------------------------------------------------------------------------------- */
