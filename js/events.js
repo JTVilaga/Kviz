@@ -16,23 +16,16 @@ function bindEvents() {
     const btnStart = document.getElementById("btn-start");
     if (btnStart) {
         btnStart.onclick = function () {
-			
-         /* FUL SCREEN F11 
-            if (document.documentElement.requestFullscreen) {
+
+            const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+            const isMobileViewport = window.matchMedia('(max-width: 700px)').matches;
+
+            if (!isPWA && !isMobileViewport && document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen().catch(function () {
-                    // Ha elutasítja vagy nem támogatott, a játék enélkül is fut tovább
+                    // Ha elutasítja, a játék enélkül is fut tovább
                 });
             }
-         */
-		/* FUL SCREEN F11 - Csak akkor fut le, ha NEM parancsikonból nyitották meg */
-			const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
-			if (!isPWA && document.documentElement.requestFullscreen) { 
-				document.documentElement.requestFullscreen().catch(function () {
-					// Ha elutasítja, a játék enélkül is fut tovább
-				});
-			}
-		 
             initGame();
 
             const level = 1;
