@@ -419,6 +419,8 @@ tbody tr {
 #reveal-warning {
     color: #c0392b;
     font-weight: bold;
+	padding: 0;
+	margin: 0;
 }
 
 #reveal-popup .popup-content.bg-correct {
