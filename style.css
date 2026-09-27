@@ -90,7 +90,6 @@ h3 {
 
 p {
     font-size: 2.5vmin;
-	margin:0;
 }
 
 select, input {
@@ -156,9 +155,9 @@ button:hover {
     margin-top: 3vmin;
 }
 
-.question-text.qlevel-1 { height: 33vmin; }
-.question-text.qlevel-2 { height: 42min; }
-.question-text.qlevel-3 { height: 58vmin; }
+.question-text.qlevel-1 { height: 20vmin; }
+.question-text.qlevel-2 { height: 30vmin; }
+.question-text.qlevel-3 { height: 40vmin; }
 
 /* ====== TÁBLÁZATOK ====== */
 
@@ -302,9 +301,9 @@ tbody tr {
     flex-direction: column;
 }
 
-#reveal-popup .popup-content.qlevel-1 { height: 60vh; }
-#reveal-popup .popup-content.qlevel-2 { height: 72vh; }
-#reveal-popup .popup-content.qlevel-3 { height: 85vh; }
+#reveal-popup .popup-content.qlevel-1 { height: 50vh; }
+#reveal-popup .popup-content.qlevel-2 { height: 62vh; }
+#reveal-popup .popup-content.qlevel-3 { height: 75vh; }
 
 /* Felső fix rész */
 .popup-header {
@@ -420,8 +419,6 @@ tbody tr {
 #reveal-warning {
     color: #c0392b;
     font-weight: bold;
-	padding: 0;
-	margin: 0;
 }
 
 #reveal-popup .popup-content.bg-correct {
