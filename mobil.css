@@ -142,11 +142,11 @@
 		overflow: auto;
 		Height: 36vmin;
     }
-	/*
+	
 	.question-text.qlevel-1 { height: 27vmin; }
 	.question-text.qlevel-2 { height: 45vmin; }
 	.question-text.qlevel-3 { height: 70vmin; }
-	*/
+	
 	#reveal-popup #reveal-question {
 		font-size: 4vmin;
 	}
