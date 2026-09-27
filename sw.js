@@ -47,37 +47,6 @@ self.addEventListener("activate", function (event) {
     self.clients.claim();
 });
 
-    const btnTelepit = document.getElementById("telepito-gomb");
-    if (btnTelepit) {
-        btnTelepit.onclick = function () {
-            if (!deferredPrompt) return;
-
-            const overlay = document.getElementById("install-overlay");
-            if (overlay) overlay.classList.remove("hidden");
-
-            deferredPrompt.prompt();
-
-            deferredPrompt.userChoice.then(function (choiceResult) {
-                if (choiceResult.outcome !== "accepted") {
-                    if (overlay) overlay.classList.add("hidden");
-                }
-                deferredPrompt = null;
-            });
-        };
-    }
-
-
-    window.addEventListener("appinstalled", function () {
-        if (btnTelepit) btnTelepit.style.display = "none";
-
-        alert("A telepítés megtörtént! Zárd be ezt a lapot, és indítsd el a játékot a kezdőképernyőn megjelenő ikonról.");
-
-        const overlay = document.getElementById("install-overlay");
-        if (overlay) overlay.classList.add("hidden");
-
-        window.close();
-    });
-
 self.addEventListener("fetch", function (event) {
     const url = new URL(event.request.url);
 
