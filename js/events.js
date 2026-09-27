@@ -204,23 +204,43 @@ function bindEvents() {
             goToStartScreen();
         };
     }
-	let installPrompt;
+    let installPrompt;
 
-	window.addEventListener('beforeinstallprompt', (e) => {
-		e.preventDefault();
-		installPrompt = e; 
-		// Megjelenítjük a gombot, mert a Netlify-on a Chrome most már engedélyezni fogja!
-		const gomb = document.getElementById('telepito-gomb');
-		if (gomb) gomb.style.display = 'block'; 
-	});
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        installPrompt = e;
+        const gomb = document.getElementById('telepito-gomb');
+        if (gomb) gomb.style.display = 'block';
+    });
 
-	document.getElementById('telepito-gomb').addEventListener('click', () => {
-		if (installPrompt) {
-			installPrompt.prompt();
-			installPrompt = null;
-			document.getElementById('telepito-gomb').style.display = 'none';
-		}
-	});	
+    document.getElementById('telepito-gomb').addEventListener('click', () => {
+        if (!installPrompt) return;
+
+        const overlay = document.getElementById("install-overlay");
+        if (overlay) overlay.classList.remove("hidden");
+
+        installPrompt.prompt();
+
+        installPrompt.userChoice.then(function (choiceResult) {
+            if (choiceResult.outcome !== "accepted") {
+                if (overlay) overlay.classList.add("hidden");
+            }
+            installPrompt = null;
+            document.getElementById('telepito-gomb').style.display = 'none';
+        });
+    });
+
+    window.addEventListener("appinstalled", function () {
+        const gomb = document.getElementById('telepito-gomb');
+        if (gomb) gomb.style.display = "none";
+
+        alert("A telepítés megtörtént! Zárd be ezt a lapot, és indítsd el a játékot a kezdőképernyőn megjelenő ikonról.");
+
+        const overlay = document.getElementById("install-overlay");
+        if (overlay) overlay.classList.add("hidden");
+
+        window.close();
+    });
 	
 	
 }
