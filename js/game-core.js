@@ -518,6 +518,7 @@ function goToNextReveal() {
         pendingNextIndex = nextIndex;
             showGameOverEffect(function () {
             showPopup("popup-game-over");
+			scrollRevealToBottom();
         });
         return;
     }	
