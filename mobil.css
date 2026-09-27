@@ -48,7 +48,7 @@
     #reveal-popup {
         order: 2;
         position: static;
-        flex: 1 1 auto;
+        /* flex: 1 1 auto; */
         width: 94vw;
         height: auto;
         max-width: 94vw;
