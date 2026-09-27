@@ -156,9 +156,9 @@ button:hover {
     margin-top: 3vmin;
 }
 
-.question-text.qlevel-1 { height: 60vmin; }
-.question-text.qlevel-2 { height: 75vmin; }
-.question-text.qlevel-3 { height: 85vmin; }
+.question-text.qlevel-1 { height: 33vmin; }
+.question-text.qlevel-2 { height: 42min; }
+.question-text.qlevel-3 { height: 58vmin; }
 
 /* ====== TÁBLÁZATOK ====== */
 
@@ -302,9 +302,9 @@ tbody tr {
     flex-direction: column;
 }
 
-#reveal-popup .popup-content.qlevel-1 { height: 50vh; }
-#reveal-popup .popup-content.qlevel-2 { height: 62vh; }
-#reveal-popup .popup-content.qlevel-3 { height: 75vh; }
+#reveal-popup .popup-content.qlevel-1 { height: 60vh; }
+#reveal-popup .popup-content.qlevel-2 { height: 72vh; }
+#reveal-popup .popup-content.qlevel-3 { height: 85vh; }
 
 /* Felső fix rész */
 .popup-header {
