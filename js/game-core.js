@@ -311,7 +311,6 @@ function choosePerfectNumber(num) {
     prepareRevealOrder();
 
     showPopup("popup-start-reveal");
-	scrollRevealToBottom();
 }
 
 
@@ -355,6 +354,7 @@ function showRevealScreen() {
 
     showNextRevealQuestion();
     showScreen("screen-reveal");
+	scrollRevealToBottom();
 }
 
 /* ------------------------------------------------------------
