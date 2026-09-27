@@ -76,6 +76,7 @@ function initGame() {
     gameOverAtIndex = null;	
 
     showScreen("screen-start");
+	
 }
 
 
@@ -804,6 +805,7 @@ function continueAfterGameOver() {
     pendingNextIndex = null;
 
     advanceToReveal(nextIndex);
+	scrollRevealToBottom();
 }
 
 function canStillWinIfThisCorrect() {
