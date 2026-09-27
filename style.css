@@ -29,7 +29,23 @@ body {
 .screen:not(.hidden) {
     display: block;
 }
-
+#install-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(4, 16, 60, 0.75);
+    backdrop-filter: blur(0.4vmin);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    color: var(--gold);
+    font-size: 4vmin;
+    font-weight: bold;
+    text-align: center;
+}
 /* 
 .center-block {
 	border-radius: 3vmin;

@@ -47,14 +47,36 @@ self.addEventListener("activate", function (event) {
     self.clients.claim();
 });
 
-window.addEventListener("appinstalled", function () {
     const btnTelepit = document.getElementById("telepito-gomb");
-    if (btnTelepit) btnTelepit.style.display = "none";
+    if (btnTelepit) {
+        btnTelepit.onclick = function () {
+            if (!deferredPrompt) return;
 
-    alert("A telepítés megtörtént! Zárd be ezt a lapot, és indítsd el a játékot a kezdőképernyőn megjelenő ikonról.");
+            const overlay = document.getElementById("install-overlay");
+            if (overlay) overlay.classList.remove("hidden");
 
-    window.close();
-});
+            deferredPrompt.prompt();
+
+            deferredPrompt.userChoice.then(function (choiceResult) {
+                if (choiceResult.outcome !== "accepted") {
+                    if (overlay) overlay.classList.add("hidden");
+                }
+                deferredPrompt = null;
+            });
+        };
+    }
+
+
+    window.addEventListener("appinstalled", function () {
+        if (btnTelepit) btnTelepit.style.display = "none";
+
+        alert("A telepítés megtörtént! Zárd be ezt a lapot, és indítsd el a játékot a kezdőképernyőn megjelenő ikonról.");
+
+        const overlay = document.getElementById("install-overlay");
+        if (overlay) overlay.classList.add("hidden");
+
+        window.close();
+    });
 
 self.addEventListener("fetch", function (event) {
     const url = new URL(event.request.url);
