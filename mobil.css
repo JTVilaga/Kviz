@@ -42,6 +42,8 @@
 		margin-left: 1vw;
 		box-sizing: border-box;
 		position: relative;
+		border-color: red;
+		border-width: 1vmin;
 
     }
 
