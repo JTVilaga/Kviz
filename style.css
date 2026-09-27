@@ -138,17 +138,7 @@ button:hover {
     width: 40vw;
     margin-top: 3vmin;
 }
-.question-text {
-    height: 27vmin;
-    overflow-y: auto;
-    display: flex;	
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-	font-size: 4vmin;
-	font-weight: bold;
-    color: orange;
-}
+
 .question-text.qlevel-1 { height: 20vmin; }
 .question-text.qlevel-2 { height: 30vmin; }
 .question-text.qlevel-3 { height: 40vmin; }
@@ -220,12 +210,6 @@ tbody tr {
 
 
 /* ====== FELTÁRÁS ANIMÁCIÓK (OLLÓS) ====== */
-
-.correct {
-    background-color: #2ecc71 !important;
-    color: white;
-    animation: slideUp 0.3s ease-out;
-}
 
 .wrong {
     background-color: #e74c3c !important;
@@ -362,10 +346,6 @@ tbody tr {
     display: flex;
     flex-direction: column;
     gap: 2vmin;
-}
-.joker-green {
-    background-color: #c8ffb2  !important;
-    border-Left: 12px solid gold;
 }
 
 .aranykor-frame td:first-child {

@@ -33,19 +33,6 @@
     }
 
 
-    
-
-    #reveal-table::after {
-        content: "";
-        display: block;
-        height: 2vmin;
-        margin: 1.5vmin 2vw 0;
-        background: linear-gradient(90deg, var(--gold), var(--cyan), var(--gold));
-        border-radius: 1vmin;
-        box-shadow: 0 0 2vmin rgba(255, 201, 74, 0.6);
-    }
-
-
     #reveal-table {
         order: 1;
         flex: 0 1 auto;
@@ -152,7 +139,7 @@
     }
 	.question-text {
         font-size: 6vmin;
-		overflow: visible;
+		overflow: auto;
 		Height: 36vmin;
     }
 	.question-text.qlevel-1 { height: 27vmin; }
