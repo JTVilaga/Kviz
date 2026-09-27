@@ -47,6 +47,15 @@ self.addEventListener("activate", function (event) {
     self.clients.claim();
 });
 
+window.addEventListener("appinstalled", function () {
+    const btnTelepit = document.getElementById("telepito-gomb");
+    if (btnTelepit) btnTelepit.style.display = "none";
+
+    alert("A telepítés megtörtént! Zárd be ezt a lapot, és indítsd el a játékot a kezdőképernyőn megjelenő ikonról.");
+
+    window.close();
+});
+
 self.addEventListener("fetch", function (event) {
     const url = new URL(event.request.url);
 
@@ -55,7 +64,7 @@ self.addEventListener("fetch", function (event) {
     }
 
     event.respondWith(
-        fetch(event.request).then(function (response) {
+        fetch(event.request, { cache: "no-store" }).then(function (response) {
             if (response.ok) {
                 const responseClone = response.clone();
                 caches.open(CACHE_NAME).then(function (cache) {
