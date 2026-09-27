@@ -311,6 +311,7 @@ function choosePerfectNumber(num) {
     prepareRevealOrder();
 
     showPopup("popup-start-reveal");
+	scrollRevealToBottom();
 }
 
 
