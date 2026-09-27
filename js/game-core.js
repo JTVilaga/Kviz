@@ -604,6 +604,7 @@ function useJoker() {
         }
 
         advanceToReveal(nextIndex + 1);
+		scrollRevealToBottom();
     });
 }
 
@@ -616,6 +617,7 @@ function skipJoker() {
     pendingNextIndex = null;
 
     advanceToReveal(nextIndex);
+	scrollRevealToBottom();
 }
 
 /* ------------------------------------------------------------
