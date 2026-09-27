@@ -163,7 +163,12 @@
 	#reveal-popup .popup-content.qlevel-3 #reveal-question {
 		font-size: 4vmin;
 	}	
-	
+	.popup-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    margin-bottom: 2vmin;
+    min-height: auto;
+}
 	
 	
 	
