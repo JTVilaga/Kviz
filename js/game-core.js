@@ -517,8 +517,7 @@ function goToNextReveal() {
         clearAranykorPrizeColumn();
         pendingNextIndex = nextIndex;
             showGameOverEffect(function () {
-            showPopup("popup-game-over");
-			scrollRevealToBottom();
+            showPopup("popup-game-over");			
         });
         return;
     }	
