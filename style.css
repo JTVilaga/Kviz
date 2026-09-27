@@ -304,11 +304,13 @@ tbody tr {
     font-weight: bold;
     display: flex;
     flex-direction: column;
+	padding: 1vmin;
 }
-
+/*
 #reveal-popup .popup-content.qlevel-1 { height: 50vh; }
 #reveal-popup .popup-content.qlevel-2 { height: 62vh; }
 #reveal-popup .popup-content.qlevel-3 { height: 75vh; }
+*/
 
 /* Felső fix rész */
 .popup-header {
