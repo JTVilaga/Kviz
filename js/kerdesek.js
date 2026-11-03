@@ -1,4 +1,5 @@
-﻿const QUESTIONS = [
+var KERDESEK_VERZIO = "2026-11-03 12:47:07";
+const QUESTIONS = [
     { id: 1, text: "Az 1 KW nagyobb teljesítmény mint 1 lóerő.", fact: true, explain: "1 lóerő 0,75 KW", level: 2 },
     { id: 2, text: "A naprendszerben minden bolygónak van holdja.", fact: false, explain: "A Merkúrnak és a Vénusznak nincs.", level: 2 },
     { id: 3, text: "A Pi és a négyzetgyökkettő is komkrét, pontos szám.", fact: false, explain: "Mindegyik végtelen tört", level: 2 },
