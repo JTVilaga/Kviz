@@ -1,4 +1,4 @@
-const CACHE_NAME = "jtkviz-cache-v9";
+const CACHE_NAME = "jtkviz-cache-v10";
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
     "mobil.css",
     "manifest.json",
     "js/kerdesek.js",
+    "js/kerdes-tar.js",
     "js/ui.js",
     "js/game-core.js",
     "js/events.js",

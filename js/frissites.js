@@ -9,10 +9,14 @@
    ezt a fájlt. Ha a verzió más, mint a betöltött kerdesek.js-é,
    a kezdőképernyőn megjelenik egy sáv "Frissítés most" gombbal.
    Játék közben nem zavar: a sáv csak a kezdőképernyőn látszik.
+
+   PWA: a gomb újratölti az oldalt, a kerdesek.js a GitHubról jön.
+   APK: a gomb letölti az új kerdesek.js-t a GitHub Pages-ről, eltárolja
+        a telefonon (kerdes-tar.js), majd újratölt – net nélkül is megmarad.
    ===================================================================== */
 (function () {
 
-    var VERZIO_URL = "kerdesek-verzio.json";
+    var VERZIO_URL = JTK_TAR.verzioUrl;
     var ELLENORZES_PERC = 5;
     var SAV_ID = "frissites-sav";
     var talaltUj = null;   // a GitHubon talált újabb verzió adatai
@@ -28,7 +32,7 @@
     function ujabbE(adat) {
         if (!adat) return false;
         var v = betoltottVerzio();
-        if (v) return !!adat.verzio && adat.verzio !== v;
+        if (v) return !!adat.verzio && adat.verzio > v;
         return (typeof QUESTIONS !== "undefined") && !!adat.darab && adat.darab !== QUESTIONS.length;
     }
 
@@ -57,7 +61,7 @@
                 "padding:6px 12px;font-weight:bold;cursor:pointer;";
             gomb.onclick = function () {
                 try { sessionStorage.setItem(CEL_KULCS, talaltUj.verzio || ""); } catch (e) { }
-                location.reload();
+                if (JTK_TAR.apk) apkLetoltes(gomb); else location.reload();
             };
             sav.appendChild(szoveg);
             sav.appendChild(gomb);
@@ -72,6 +76,30 @@
             : "Új kérdések érkeztek" + db + "!";
         document.getElementById(SAV_ID + "-szoveg").textContent = szoveg;
         sav.style.display = "flex";
+    }
+
+    /* APK: az új kerdesek.js letöltése és eltárolása, aztán újraindítás */
+    function apkLetoltes(gomb) {
+        gomb.disabled = true;
+        gomb.textContent = "Letöltés…";
+        fetch(JTK_TAR.kerdesekUrl + "?_=" + Date.now(), { cache: "no-store" })
+            .then(function (r) {
+                if (!r.ok) throw new Error("HTTP " + r.status);
+                return r.text();
+            })
+            .then(function (szoveg) {
+                var e = JTK_TAR.feldolgoz(szoveg);          // hibás fájlt nem mentünk el
+                if (e.verzio < talaltUj.verzio) throw new Error("még a régi jött le");
+                JTK_TAR.ment(szoveg, e.verzio);
+                location.reload();
+            })
+            .catch(function (hiba) {
+                console.warn("Kérdésletöltés sikertelen:", hiba);
+                gomb.disabled = false;
+                gomb.textContent = "Frissítés most";
+                document.getElementById(SAV_ID + "-szoveg").textContent =
+                    "A letöltés nem sikerült – próbáld újra 1-2 perc múlva.";
+            });
     }
 
     function savElrejt() {
