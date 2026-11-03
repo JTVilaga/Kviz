@@ -1,4 +1,4 @@
-const CACHE_NAME = "jtkviz-cache-v8";
+const CACHE_NAME = "jtkviz-cache-v9";
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -60,8 +60,18 @@ self.addEventListener("fetch", function (event) {
         return;
     }
 
+    // A GitHub Pages szervere (CDN) kb. 10 percig a régi fájlt is kiadhatja.
+    // A kód- és adatfájlokat ezért egyedi ?_=időbélyeggel kérjük le,
+    // így mindig a legfrissebb jön; a cache-be az eredeti néven tesszük.
+    let halozatiKeres = event.request;
+    if (/\.(js|css|html|json)$/.test(url.pathname) || url.pathname.endsWith("/")) {
+        const friss = new URL(url);
+        friss.searchParams.set("_", Date.now());
+        halozatiKeres = friss.toString();
+    }
+
     event.respondWith(
-        fetch(event.request, { cache: "no-store" }).then(function (response) {
+        fetch(halozatiKeres, { cache: "no-store" }).then(function (response) {
             if (response.ok) {
                 const responseClone = response.clone();
                 caches.open(CACHE_NAME).then(function (cache) {

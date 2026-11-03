@@ -16,6 +16,7 @@
     var ELLENORZES_PERC = 5;
     var SAV_ID = "frissites-sav";
     var talaltUj = null;   // a GitHubon talált újabb verzió adatai
+    var CEL_KULCS = "jtkviz-frissites-cel";   // melyik verzióra frissítettünk legutóbb
 
     /* A betöltött kerdesek.js verziója (a feltöltő szkript írja bele) */
     function betoltottVerzio() {
@@ -54,13 +55,22 @@
             gomb.style.cssText =
                 "background:#4da3ff;color:#002b5c;border:none;border-radius:6px;" +
                 "padding:6px 12px;font-weight:bold;cursor:pointer;";
-            gomb.onclick = function () { location.reload(); };
+            gomb.onclick = function () {
+                try { sessionStorage.setItem(CEL_KULCS, talaltUj.verzio || ""); } catch (e) { }
+                location.reload();
+            };
             sav.appendChild(szoveg);
             sav.appendChild(gomb);
             document.body.appendChild(sav);
         }
         var db = talaltUj.darab ? " (" + talaltUj.darab + " kérdés)" : "";
-        document.getElementById(SAV_ID + "-szoveg").textContent = "Új kérdések érkeztek" + db + "!";
+        var mar = null;
+        try { mar = sessionStorage.getItem(CEL_KULCS); } catch (e) { }
+        // Ha erre a verzióra már frissítettünk, de még mindig a régi jött le:
+        var szoveg = (mar && mar === talaltUj.verzio)
+            ? "A frissítés még úton van – próbáld újra 1-2 perc múlva."
+            : "Új kérdések érkeztek" + db + "!";
+        document.getElementById(SAV_ID + "-szoveg").textContent = szoveg;
         sav.style.display = "flex";
     }
 
