@@ -1,4 +1,4 @@
-const CACHE_NAME = "jtkviz-cache-v7";
+const CACHE_NAME = "jtkviz-cache-v8";
 
 const ASSETS_TO_CACHE = [
     "./",
@@ -11,8 +11,9 @@ const ASSETS_TO_CACHE = [
     "js/game-core.js",
     "js/events.js",
     "js/player.js",
+    "js/frissites.js",
     "jtkviz-hatter.jpg",
-	"ikon.jpg",
+	"ikon.png",
 	"ikon-192.png",
 	"ikon-512.png"
 ];
@@ -51,6 +52,11 @@ self.addEventListener("fetch", function (event) {
     const url = new URL(event.request.url);
 
     if (event.request.method !== "GET" || url.origin !== self.location.origin) {
+        return;
+    }
+
+    // A verziófájlt soha nem tesszük cache-be: mindig a hálózatról jön (frissites.js kéri)
+    if (url.pathname.endsWith("kerdesek-verzio.json")) {
         return;
     }
 
